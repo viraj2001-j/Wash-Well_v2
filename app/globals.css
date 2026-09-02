@@ -1,26 +1,272 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ============================================================
+   THEME
+============================================================ */
+
+@theme {
+  --font-inter: "Inter", system-ui, sans-serif;
+
+  /* Primary brand */
+  --color-brand-purple: #5420d8;
+  --color-brand-purple-dark: #4216b5;
+  --color-brand-purple-light: #f1edff;
+
+  /* Lavender */
+  --color-brand-lavender: #f7f4ff;
+  --color-brand-lavender-soft: #faf9fc;
+
+  /* Text */
+  --color-brand-dark: #191621;
+  --color-brand-text: #302b38;
+  --color-brand-muted: #918b99;
+
+  /* Borders */
+  --color-brand-border: #ebe7f2;
+  --color-brand-border-light: #f0edf5;
+
+  /* Status */
+  --color-brand-success: #43c889;
+  --color-brand-danger: #d94b5b;
+
+  /* Shadows */
+  --shadow-brand: 0 8px 24px rgba(84, 32, 216, 0.20);
+  --shadow-card: 0 5px 24px rgba(35, 20, 70, 0.045);
+  --shadow-card-hover: 0 12px 32px rgba(35, 20, 70, 0.08);
+  --shadow-soft: 0 3px 14px rgba(35, 20, 70, 0.04);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ============================================================
+   BASE
+============================================================ */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+
+    font-family: var(--font-inter);
+
+    color: var(--color-brand-dark);
+
+    background: #f7f6fa;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  ::selection {
+    background: #e2d8ff;
+    color: #32107f;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: #d9d3e4;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #bdb4cd;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================================
+   COMPONENTS
+============================================================ */
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 font-semibold text-white transition-all duration-200;
+
+    background: var(--color-brand-purple);
+    box-shadow: var(--shadow-brand);
+  }
+
+  .btn-primary:hover {
+    background: var(--color-brand-purple-dark);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border bg-white px-6 py-3 font-semibold transition-all duration-200;
+
+    color: var(--color-brand-purple);
+    border-color: #ddd6ed;
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-brand-purple-light);
+    border-color: #d7ccef;
+  }
+
+  .btn-outline-white {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 bg-transparent px-6 py-3 font-semibold text-white transition-all duration-200;
+
+    border-color: white;
+  }
+
+  .btn-outline-white:hover {
+    background: white;
+    color: var(--color-brand-purple);
+  }
+
+  .section-tag {
+    @apply inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide;
+
+    color: var(--color-brand-purple);
+  }
+
+  .section-heading {
+    @apply text-3xl font-bold leading-tight md:text-4xl;
+
+    color: var(--color-brand-dark);
+  }
+
+  .card {
+    @apply rounded-[20px] bg-white p-6 transition-all duration-300;
+
+    border: 1px solid var(--color-brand-border);
+    box-shadow: var(--shadow-card);
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
+  }
+
+  .input-field {
+    @apply w-full rounded-[13px] border bg-white px-4 py-3 outline-none transition-all duration-200;
+
+    color: var(--color-brand-dark);
+    border-color: #e4dfeb;
+  }
+
+  .input-field::placeholder {
+    color: #aaa5b1;
+  }
+
+  .input-field:focus {
+    border-color: #bca9ed;
+    box-shadow: 0 0 0 3px rgba(84, 32, 216, 0.08);
+  }
+
+  .nav-link {
+    @apply relative font-medium text-gray-600 transition-colors duration-200;
+  }
+
+  .nav-link:hover {
+    color: var(--color-brand-purple);
+  }
+
+  .nav-link-active {
+    @apply font-semibold;
+
+    color: var(--color-brand-purple);
+  }
+}
+
+/* ============================================================
+   MARQUEE
+============================================================ */
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+/* ============================================================
+   SOFT FLOAT
+============================================================ */
+
+@keyframes soft-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-soft-float {
+  animation: soft-float 4s ease-in-out infinite;
+}
+
+/* ============================================================
+   REDUCED MOTION
+============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================
+   GLOBAL FONT ENFORCEMENT (INTER)
+============================================================ */
+
+html, body, button, input, select, textarea {
+  font-family: var(--font-inter), 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
 }
