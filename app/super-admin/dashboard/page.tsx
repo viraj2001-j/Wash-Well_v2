@@ -1,7 +1,7 @@
 import { requireSuperAdmin } from "@/lib/auth/require-super-admin";
 import prisma from "@/lib/db";
 import Link from "next/link";
-import { Building2, Users, ShoppingBag, ShieldCheck, Plus, ArrowRight, CheckCircle2, AlertTriangle, Layers } from "lucide-react";
+import { Building2, Users, ShoppingBag, ShieldCheck, Plus, ArrowRight, CheckCircle2, AlertTriangle, Layers, Sparkles } from "lucide-react";
 
 export default async function SuperAdminDashboardPage() {
   const user = await requireSuperAdmin();
@@ -18,22 +18,30 @@ export default async function SuperAdminDashboardPage() {
   return (
     <div className="space-y-6">
       
-      {/* HEADER BAR */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-3xl border border-gray-100 shadow-2xs">
-        <div>
+      {/* HEADER BANNER */}
+      <div className="bg-white rounded-[28px] border border-[#ebe7fe] p-6 sm:p-8 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(96,82,255,0.08)] transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+        <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 bg-purple-100 text-[#7C3AED] font-black text-[10px] rounded-md uppercase tracking-wider">
-              System Control Panel
-            </span>
-            <span className="text-xs text-gray-400 font-bold">• {user.fullName} ({user.email})</span>
+            <div className="inline-flex items-center gap-2 bg-[#f5f4fe] border border-[#e4e1fe] rounded-full px-4 py-1.5 shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-[#6052ff] flex-shrink-0 animate-pulse" />
+              <span className="text-[12px] font-bold text-[#6052ff] tracking-wider uppercase">
+                SYSTEM CONTROL PANEL
+              </span>
+            </div>
+            <span className="text-xs text-gray-400 font-semibold">• {user.fullName} ({user.email})</span>
           </div>
-          <h1 className="text-2xl font-black text-gray-900 tracking-tight mt-1">Platform Dashboard</h1>
-          <p className="text-xs text-gray-500 font-medium">Overview of registered tenants, platform users, and multi-organization stats</p>
+
+          <h1 className="text-2xl sm:text-3xl font-black text-[#0f172a] tracking-tight">
+            Platform <span className="text-[#6052ff] italic font-black">Dashboard</span>
+          </h1>
+          <p className="text-gray-500 text-xs sm:text-sm leading-relaxed max-w-xl">
+            Overview of registered tenants, platform users, and multi-organization operational statistics.
+          </p>
         </div>
 
         <Link
           href="/super-admin/organizations/new"
-          className="px-4 py-2.5 bg-gradient-to-r from-[#7C3AED] to-purple-800 text-white rounded-xl font-extrabold text-xs shadow-md shadow-purple-200 hover:shadow-lg transition flex items-center gap-2 shrink-0"
+          className="inline-flex items-center justify-center gap-2 bg-[#6052ff] hover:bg-[#4f3eff] text-white font-bold text-xs px-6 py-3.5 rounded-full transition-all duration-200 shadow-[0_6px_20px_rgba(96,82,255,0.3)] hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(96,82,255,0.4)] shrink-0"
         >
           <Plus size={16} />
           <span>New Organization</span>
@@ -41,89 +49,113 @@ export default async function SuperAdminDashboardPage() {
       </div>
 
       {/* METRIC STAT CARDS */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white p-5 rounded-3xl border border-gray-100 shadow-2xs space-y-2">
-          <div className="flex items-center justify-between text-purple-700">
-            <span className="text-xs font-bold text-gray-500">Total Organizations</span>
-            <Building2 className="w-5 h-5 p-1 bg-purple-50 rounded-lg text-[#7C3AED]" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="bg-white rounded-[28px] border border-[#ebe7fe] p-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_rgba(96,82,255,0.12)] hover:-translate-y-1 transition-all space-y-4">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Organizations</span>
+            <div className="w-10 h-10 rounded-2xl bg-[#e6e2fe]/70 text-[#6052ff] flex items-center justify-center">
+              <Building2 className="w-5 h-5" />
+            </div>
           </div>
-          <p className="text-3xl font-black text-gray-900">{totalCompanies}</p>
-          <div className="flex items-center gap-2 text-[10px] font-bold">
-            <span className="text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">{activeCompanies} Active</span>
-            <span className="text-rose-600 bg-rose-50 px-2 py-0.5 rounded-md">{inactiveCompanies} Inactive</span>
+          <div>
+            <p className="text-3xl sm:text-4xl font-black text-[#0f172a]">{totalCompanies}</p>
+          </div>
+          <div className="flex items-center gap-2 text-xs font-bold pt-1">
+            <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+              {activeCompanies} Active
+            </span>
+            <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-800 border border-rose-200">
+              {inactiveCompanies} Inactive
+            </span>
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-3xl border border-gray-100 shadow-2xs space-y-2">
-          <div className="flex items-center justify-between text-indigo-700">
-            <span className="text-xs font-bold text-gray-500">Platform Users</span>
-            <Users className="w-5 h-5 p-1 bg-indigo-50 rounded-lg text-indigo-600" />
+        <div className="bg-white rounded-[28px] border border-[#ebe7fe] p-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_rgba(96,82,255,0.12)] hover:-translate-y-1 transition-all space-y-4">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Platform Users</span>
+            <div className="w-10 h-10 rounded-2xl bg-[#e6e2fe]/70 text-[#6052ff] flex items-center justify-center">
+              <Users className="w-5 h-5" />
+            </div>
           </div>
-          <p className="text-3xl font-black text-gray-900">{totalUsers}</p>
-          <p className="text-[10px] text-gray-400 font-medium">Cross-tenant registered accounts</p>
+          <div>
+            <p className="text-3xl sm:text-4xl font-black text-[#0f172a]">{totalUsers}</p>
+          </div>
+          <p className="text-xs text-gray-400 font-semibold pt-1">Cross-tenant registered accounts</p>
         </div>
 
-        <div className="bg-white p-5 rounded-3xl border border-gray-100 shadow-2xs space-y-2">
-          <div className="flex items-center justify-between text-emerald-700">
-            <span className="text-xs font-bold text-gray-500">Total System Orders</span>
-            <ShoppingBag className="w-5 h-5 p-1 bg-emerald-50 rounded-lg text-emerald-600" />
+        <div className="bg-white rounded-[28px] border border-[#ebe7fe] p-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_rgba(96,82,255,0.12)] hover:-translate-y-1 transition-all space-y-4">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total System Orders</span>
+            <div className="w-10 h-10 rounded-2xl bg-[#e6e2fe]/70 text-[#6052ff] flex items-center justify-center">
+              <ShoppingBag className="w-5 h-5" />
+            </div>
           </div>
-          <p className="text-3xl font-black text-gray-900">{totalOrders}</p>
-          <p className="text-[10px] text-emerald-700 font-bold">All organization orders</p>
+          <div>
+            <p className="text-3xl sm:text-4xl font-black text-[#0f172a]">{totalOrders}</p>
+          </div>
+          <p className="text-xs text-[#6052ff] font-bold pt-1">All organization laundry orders</p>
         </div>
 
-        <div className="bg-white p-5 rounded-3xl border border-gray-100 shadow-2xs space-y-2">
-          <div className="flex items-center justify-between text-purple-700">
-            <span className="text-xs font-bold text-gray-500">Security & Status</span>
-            <ShieldCheck className="w-5 h-5 p-1 bg-purple-50 rounded-lg text-[#7C3AED]" />
+        <div className="bg-white rounded-[28px] border border-[#ebe7fe] p-6 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_rgba(96,82,255,0.12)] hover:-translate-y-1 transition-all space-y-4">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Security &amp; Status</span>
+            <div className="w-10 h-10 rounded-2xl bg-[#e6e2fe]/70 text-[#6052ff] flex items-center justify-center">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
           </div>
-          <p className="text-lg font-black text-emerald-600 flex items-center gap-1.5 mt-1">
-            <CheckCircle2 size={18} />
-            <span>Operational</span>
-          </p>
-          <p className="text-[10px] text-gray-400 font-medium">Platform Auth & Multi-tenant isolation OK</p>
+          <div>
+            <p className="text-xl font-black text-emerald-600 flex items-center gap-1.5">
+              <CheckCircle2 size={20} />
+              <span>Operational</span>
+            </p>
+          </div>
+          <p className="text-xs text-gray-400 font-semibold pt-1">Platform Auth &amp; Multi-tenant isolation OK</p>
         </div>
       </div>
 
       {/* QUICK LINKS GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         <Link
           href="/super-admin/organizations"
-          className="p-6 bg-white rounded-3xl border border-gray-100 shadow-2xs hover:border-purple-200 transition group space-y-2"
+          className="bg-white rounded-[28px] border border-[#ebe7fe] p-6.5 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:border-[#6052ff]/40 hover:shadow-[0_16px_36px_rgba(96,82,255,0.12)] hover:-translate-y-1 transition-all group"
         >
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-purple-50 text-[#7C3AED] flex items-center justify-center font-bold">
-                <Building2 size={20} />
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-[#e6e2fe]/70 text-[#6052ff] flex items-center justify-center font-bold flex-shrink-0 group-hover:bg-[#6052ff] group-hover:text-white transition-colors duration-300">
+                <Building2 size={22} />
               </div>
               <div>
-                <h3 className="font-extrabold text-gray-900 text-sm group-hover:text-[#7C3AED] transition">
+                <h3 className="font-black text-[#0f172a] text-base group-hover:text-[#6052ff] transition-colors">
                   Manage Organizations
                 </h3>
-                <p className="text-xs text-gray-500">View, edit, activate/deactivate, and manage organization admins</p>
+                <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">
+                  View, edit, activate/deactivate, and manage organization admins
+                </p>
               </div>
             </div>
-            <ArrowRight size={18} className="text-gray-400 group-hover:text-[#7C3AED] group-hover:translate-x-1 transition" />
+            <ArrowRight size={20} className="text-gray-300 group-hover:text-[#6052ff] group-hover:translate-x-1 transition-all" />
           </div>
         </Link>
 
         <Link
           href="/super-admin/organizations/new"
-          className="p-6 bg-white rounded-3xl border border-gray-100 shadow-2xs hover:border-purple-200 transition group space-y-2"
+          className="bg-white rounded-[28px] border border-[#ebe7fe] p-6.5 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:border-[#6052ff]/40 hover:shadow-[0_16px_36px_rgba(96,82,255,0.12)] hover:-translate-y-1 transition-all group"
         >
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
-                <Plus size={20} />
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-[#e6e2fe]/70 text-[#6052ff] flex items-center justify-center font-bold flex-shrink-0 group-hover:bg-[#6052ff] group-hover:text-white transition-colors duration-300">
+                <Plus size={22} />
               </div>
               <div>
-                <h3 className="font-extrabold text-gray-900 text-sm group-hover:text-emerald-600 transition">
+                <h3 className="font-black text-[#0f172a] text-base group-hover:text-[#6052ff] transition-colors">
                   Create New Organization
                 </h3>
-                <p className="text-xs text-gray-500">Register a new tenant company with custom code slug and branding</p>
+                <p className="text-xs text-gray-500 mt-0.5 leading-relaxed">
+                  Register a new tenant company with custom code slug and branding
+                </p>
               </div>
             </div>
-            <ArrowRight size={18} className="text-gray-400 group-hover:text-emerald-600 group-hover:translate-x-1 transition" />
+            <ArrowRight size={20} className="text-gray-300 group-hover:text-[#6052ff] group-hover:translate-x-1 transition-all" />
           </div>
         </Link>
       </div>

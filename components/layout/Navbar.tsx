@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X, UserCheck, UserPlus, Building2, ChevronRight } from 'lucide-react';
 
 const navLinks = [
-  { href: '/', label: 'Home' },
+  { href: '/c/mob', label: 'Home' },
   { href: '/about', label: 'About Us' },
   { href: '/services', label: 'Services' },
   { href: '/pricing', label: 'Prices' },
@@ -15,6 +15,7 @@ const navLinks = [
 
 const publicHomepageRoutes = [
   '/',
+  '/c/mob',
   '/about',
   '/services',
   '/pricing',
@@ -101,7 +102,7 @@ export default function Navbar() {
           {/* ── Desktop layout: 3-column grid ── */}
           <div className="hidden md:grid grid-cols-[auto_1fr_auto] items-center h-[70px] gap-4">
             {/* Col 1 — Logo (left) */}
-            <Link href="/" className="flex items-center gap-2.5 select-none flex-shrink-0">
+            <Link href="/c/mob" className="flex items-center gap-2.5 select-none flex-shrink-0">
               <div className="w-10 h-10 rounded-full bg-[#5c52e5] flex items-center justify-center flex-shrink-0 shadow-md">
                 <span className="text-white font-black text-[18px] leading-none">G</span>
               </div>
@@ -119,7 +120,7 @@ export default function Navbar() {
             {/* Col 2 — Nav (center) */}
             <nav className="flex items-center justify-center gap-6 lg:gap-8">
               {navLinks.map(({ href, label }) => {
-                const isActive = pathname === href;
+                const isActive = pathname === href || (href === '/c/mob' && (pathname === '/' || pathname === '/c/mob'));
                 return (
                   <Link
                     key={href}
@@ -161,7 +162,7 @@ export default function Navbar() {
           {/* ── Mobile layout ── */}
           <div className="flex md:hidden items-center justify-between h-[64px]">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 select-none">
+            <Link href="/c/mob" className="flex items-center gap-2 select-none">
               <div className="w-9 h-9 rounded-full bg-[#5c52e5] flex items-center justify-center flex-shrink-0">
                 <span className="text-white font-black text-[16px] leading-none">G</span>
               </div>

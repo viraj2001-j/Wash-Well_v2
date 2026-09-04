@@ -1,15 +1,12 @@
 import { getCurrentUser } from "@/lib/auth/get-current-user";
-import prisma from "@/lib/db";
+import { getCompanyByCode } from "@/lib/services/company";
 import SidebarClient from "./SidebarClient";
 
 export default async function Sidebar({ companyCode }: { companyCode: string }) {
   const user = await getCurrentUser();
   if (!user) return null;
 
-  const company = await prisma.company.findUnique({
-    where: { code: companyCode },
-    select: { name: true, logoUrl: true },
-  });
+  const company = await getCompanyByCode(companyCode);
 
   let primaryRole = "STAFF";
   let roleCategory: "ADMIN_MANAGER" | "REF" | "DRIVER" = "ADMIN_MANAGER";

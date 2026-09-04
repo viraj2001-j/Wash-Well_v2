@@ -56,7 +56,7 @@ const TiktokIcon = ({ className }: { className?: string }) => (
 
 const footerLinks = {
   explore: [
-    { label: 'Home', href: '/' },
+    { label: 'Home', href: '/c/mob' },
     { label: 'About Us', href: '/about' },
     { label: 'Services', href: '/services' },
     { label: 'Pricing', href: '/pricing' },
@@ -107,7 +107,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
 
             <Link
-              href="/"
+              href="/c/mob"
               className="flex items-center gap-2.5 mb-4"
             >
               <div className="w-10 h-10 rounded-full bg-[#6052ff] flex items-center justify-center">

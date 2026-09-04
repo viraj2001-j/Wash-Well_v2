@@ -1,147 +1,144 @@
-import type { Metadata } from 'next';
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Check, Zap, Sparkles, Shirt, Flame, Droplets, Moon } from 'lucide-react';
-
-export const metadata: Metadata = {
-  title: 'Services — Go Clean',
-  description: 'Explore all laundry and dry cleaning services offered by Go Clean.',
-};
+import { ArrowRight, Check, Sparkles, Shirt, Flame, Droplets, Moon, Package, Truck, WashingMachine, Shield } from 'lucide-react';
+import ScrollReveal from '@/components/ui/ScrollReveal';
 
 const services = [
   {
-    icon: (
-      <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-[#6052ff]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10a2 2 0 002 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z" />
-      </svg>
-    ),
+    image: '/step1.jpg',
+    icon: <Package className="w-5 h-5 text-[#6052ff]" />,
     title: 'Wash & Fold',
     desc: 'We wash your clothes using premium eco-friendly detergents, then neatly fold and pack them for delivery. Perfect for everyday laundry.',
     price: 'From $2.50/lb',
     features: ['Sorted by color & fabric', 'Eco-friendly detergent', 'Neatly folded & packaged'],
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-[#6052ff]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2l2.4 4.8 5.3.8-3.8 3.7.9 5.3-4.8-2.5-4.8 2.5.9-5.3-3.8-3.7 5.3-.8L12 2z" />
-        <circle cx="6" cy="19" r="1.5" fill="#6052ff" />
-      </svg>
-    ),
+    image: '/washing_machine_hero.jpg',
+    icon: <Sparkles className="w-5 h-5 text-[#6052ff]" />,
     title: 'Dry Cleaning',
     desc: 'Professional dry cleaning for delicate fabrics, suits, dresses, and formal wear. Each item is individually inspected and treated.',
     price: 'From $8.00/item',
     features: ['Individual inspection', 'Eco-solvent cleaning', 'Protective garment bags'],
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-[#6052ff]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2.5a4.5 4.5 0 014.5 4.5c0 3-4.5 6.5-4.5 6.5S7.5 10 7.5 7A4.5 4.5 0 0112 2.5z" />
-        <path d="M5 19.5c0-1.5 3.1-2.5 7-2.5s7 1 7 2.5" />
-      </svg>
-    ),
+    image: '/hero_laundry_woman.jpg',
+    icon: <Shirt className="w-5 h-5 text-[#6052ff]" />,
     title: 'Ironing & Press',
-    desc: 'Crisp, perfectly pressed clothes ready for work or special occasions. We handle shirts, trousers, dresses, and more.',
+    desc: 'Crisp, perfectly pressed clothes ready for work or special occasions. We handle shirts, trousers, dresses, and formal suits.',
     price: 'From $3.00/item',
-    features: ['Steam press finish', 'Hang or fold delivery', 'All fabric types'],
+    features: ['Steam press finish', 'Hang or fold delivery', 'Safe for all fabric types'],
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-[#6052ff]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-      </svg>
-    ),
-    title: 'Express Service',
-    desc: '24-hour turnaround for urgent situations. Same pickup, same care — just faster.',
+    image: '/hero_professional.jpg',
+    icon: <Truck className="w-5 h-5 text-[#6052ff]" />,
+    title: 'Express 24hr Service',
+    desc: '24-hour rapid turnaround for urgent situations. Same pickup, same expert care — delivered back twice as fast.',
     price: 'From $15.00 flat fee',
-    features: ['24hr turnaround', 'Priority handling', 'Real-time tracking'],
+    features: ['24hr turnaround', 'Priority route handling', 'Real-time GPS tracking'],
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-[#6052ff]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z" />
-        <circle cx="10" cy="14" r="1.5" fill="#6052ff" />
-      </svg>
-    ),
-    title: 'Shoe Cleaning',
-    desc: 'Restore your sneakers, leather shoes, and boots to near-new condition with our professional shoe care service.',
+    image: '/step2.jpg',
+    icon: <Shield className="w-5 h-5 text-[#6052ff]" />,
+    title: 'Shoe Care & Restoration',
+    desc: 'Restore your sneakers, leather shoes, and boots to near-new condition with our professional shoe cleaning service.',
     price: 'From $12.00/pair',
-    features: ['Deep stain removal', 'Sole scrubbing', 'Conditioning & polish'],
+    features: ['Deep stain removal', 'Sole scrubbing & care', 'Conditioning & polish'],
   },
   {
-    icon: (
-      <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-[#6052ff]" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M2 4v16h20V4H2zm4 4h12v8H6V8z" />
-        <path d="M6 12h12" />
-      </svg>
-    ),
-    title: 'Comforter & Bedding',
-    desc: 'Large item cleaning for duvets, comforters, pillows, and blankets. Freshly cleaned and hygienically dried.',
+    image: '/realistic_washing_machine.jpg',
+    icon: <WashingMachine className="w-5 h-5 text-[#6052ff]" />,
+    title: 'Comforters & Bedding',
+    desc: 'Large item cleaning for duvets, comforters, pillows, and heavy blankets. Freshly cleaned and hygienically heat-dried.',
     price: 'From $20.00/item',
-    features: ['Deep clean cycle', 'Hypoallergenic safe', 'Large item handling'],
+    features: ['Deep hygienic clean', 'Hypoallergenic certified', 'Large item commercial drums'],
   },
 ];
 
 export default function ServicesPage() {
   return (
-    <main className="bg-[#f5f4fe] min-h-screen">
-      {/* Hero */}
-      <section className="bg-[#f5f4fe] py-20 text-center">
-        <div className="max-w-3xl mx-auto px-4">
-          <div className="inline-flex items-center gap-2 bg-white border border-[#e4e1fe] rounded-full px-4 py-1.5 shadow-sm mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#6052ff] flex-shrink-0" />
-            <span className="text-[12px] font-bold text-[#6052ff] tracking-wider uppercase">
-              OUR SERVICES
-            </span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl font-black text-[#0f172a] mb-5 tracking-tight">
-            Professional <span className="text-[#6052ff] italic font-black">Laundry Services</span>
-          </h1>
-          <p className="text-gray-500 text-base sm:text-lg max-w-xl mx-auto">
-            Every service is crafted to give your clothes the care they deserve.
-          </p>
+    <main className="bg-[#f5f4fe] min-h-screen font-sans">
+      {/* ══════════════════════════════════════════
+          HERO
+      ══════════════════════════════════════════ */}
+      <section className="bg-[#f5f4fe] py-16 sm:py-20 text-center">
+        <div className="max-w-3xl mx-auto px-6 lg:px-12">
+          <ScrollReveal variant="fade-down">
+            <div className="inline-flex items-center gap-2 bg-white border border-[#e4e1fe] rounded-full px-4 py-1.5 shadow-sm mb-4">
+              <span className="w-2 h-2 rounded-full bg-[#6052ff] flex-shrink-0 animate-pulse" />
+              <span className="text-[12px] font-bold text-[#6052ff] tracking-wider uppercase">
+                OUR EXPERTISE
+              </span>
+            </div>
+            <h1 className="text-4xl sm:text-5xl font-black text-[#0f172a] mb-5 tracking-tight">
+              Professional <span className="text-[#6052ff] italic font-black">Fabric Care Services</span>
+            </h1>
+            <p className="text-gray-500 text-base sm:text-lg max-w-xl mx-auto">
+              Every service is tailored to give your garments, shoes, and bedding the exact commercial care they deserve.
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* Services Grid */}
+      {/* ══════════════════════════════════════════
+          SERVICES GRID
+      ══════════════════════════════════════════ */}
       <section className="pb-24 bg-[#f5f4fe]">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map(({ icon, title, desc, price, features }) => (
-              <div
-                key={title}
-                className="bg-white rounded-[28px] border border-[#ebe7fe] p-8 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(96,82,255,0.09)] transition-all duration-300 flex flex-col justify-between group"
-              >
-                <div>
-                  {/* Soft lavender squircle icon container matching home page */}
-                  <div className="w-12 h-12 rounded-2xl bg-[#e6e2fe]/70 flex items-center justify-center mb-6">
-                    {icon}
-                  </div>
-                  <h2 className="text-xl font-black text-[#0f172a] mb-3 group-hover:text-[#6052ff] transition-colors">
-                    {title}
-                  </h2>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-6">
-                    {desc}
-                  </p>
-                  <ul className="space-y-2.5 mb-8 border-t border-gray-100 pt-5">
-                    {features.map(f => (
-                      <li key={f} className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-gray-600">
-                        <Check className="w-4 h-4 text-[#6052ff] flex-shrink-0" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+            {services.map(({ image, icon, title, desc, price, features }, idx) => (
+              <ScrollReveal key={title} variant="fade-up" delay={idx * 120}>
+                <div
+                  className="bg-white rounded-[28px] border border-[#ebe7fe] p-6 shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_rgba(96,82,255,0.12)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group overflow-hidden h-full"
+                >
+                  <div className="space-y-4">
+                    {/* Service Card Image Header */}
+                    <div className="relative w-full aspect-[16/10] rounded-[20px] overflow-hidden bg-slate-100 shadow-xs">
+                      <Image
+                        src={image}
+                        alt={title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                      <div className="absolute top-3 left-3 w-10 h-10 rounded-xl bg-white/90 text-[#6052ff] backdrop-blur-xs flex items-center justify-center shadow-md">
+                        {icon}
+                      </div>
+                    </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                  <span className="text-[#6052ff] font-bold text-sm">{price}</span>
-                  <Link
-                    href="/pickup"
-                    className="inline-flex items-center gap-1.5 bg-[#6052ff] hover:bg-[#4f3eff] text-white text-xs font-bold px-4 py-2 rounded-full transition-all duration-200 shadow-sm"
-                  >
-                    Book Now <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
+                    <div>
+                      <h2 className="text-xl font-black text-[#0f172a] mb-2 group-hover:text-[#6052ff] transition-colors">
+                        {title}
+                      </h2>
+                      <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                        {desc}
+                      </p>
+                    </div>
+
+                    <ul className="space-y-2 mb-6 border-t border-gray-100 pt-4">
+                      {features.map((f) => (
+                        <li key={f} className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-gray-600">
+                          <div className="w-4 h-4 rounded-full bg-[#e6e2fe] text-[#6052ff] flex items-center justify-center flex-shrink-0">
+                            <Check className="w-3 h-3" />
+                          </div>
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                    <span className="text-[#6052ff] font-extrabold text-sm sm:text-base">{price}</span>
+                    <Link
+                      href="/pricing"
+                      className="inline-flex items-center gap-1.5 bg-[#6052ff] hover:bg-[#4f3eff] text-white text-xs font-bold px-4 py-2.5 rounded-full transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-px"
+                    >
+                      View Rates <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -150,23 +147,23 @@ export default function ServicesPage() {
       {/* ══════════════════════════════════════════
           OUR PROCESS — FOUR SIMPLE STEPS
       ══════════════════════════════════════════ */}
-      <section className="py-20 bg-[#f5f4fe]">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
-          {/* Header */}
-          <div className="text-center mb-14">
-            <div className="inline-flex items-center gap-2 bg-white border border-[#e4e1fe] rounded-full px-4 py-1.5 shadow-sm mb-4">
-              <span className="w-2 h-2 rounded-full bg-[#6052ff] flex-shrink-0" />
-              <span className="text-[12px] font-bold text-[#6052ff] tracking-wider uppercase">
-                OUR PROCESS
-              </span>
+          <ScrollReveal variant="fade-up">
+            <div className="text-center mb-14">
+              <div className="inline-flex items-center gap-2 bg-white border border-[#e4e1fe] rounded-full px-4 py-1.5 shadow-sm mb-4">
+                <span className="w-2 h-2 rounded-full bg-[#6052ff] flex-shrink-0 animate-pulse" />
+                <span className="text-[12px] font-bold text-[#6052ff] tracking-wider uppercase">
+                  OUR PROCESS
+                </span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-black text-[#0f172a] tracking-tight">
+                Four Simple <span className="text-[#6052ff] italic font-black">Steps</span>
+              </h2>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-black text-[#0f172a] tracking-tight">
-              Four simple <span className="text-[#6052ff] italic font-black">steps</span>
-            </h2>
-          </div>
+          </ScrollReveal>
 
-          {/* 4 Step Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
@@ -179,65 +176,68 @@ export default function ServicesPage() {
                 step: '02',
                 image: '/step2.jpg',
                 title: 'We Collect Clothes',
-                desc: 'Our team collects your clothes right from your home.',
+                desc: 'Our representative collects your garments right from your door.',
               },
               {
                 step: '03',
                 image: '/step3.jpg',
                 title: 'Professional Clean',
-                desc: 'Expert care and deep clean for every fabric.',
+                desc: 'Expert care, eco-washing, and steam pressing for every fabric.',
               },
               {
                 step: '04',
                 image: '/hero_professional.jpg',
                 title: 'Fresh Delivery',
-                desc: 'Clean clothes returned to you fresh and pressed.',
+                desc: 'Clean garments returned to you fresh and ready to wear.',
               },
-            ].map(({ step, image, title, desc }) => (
-              <div key={step} className="bg-white rounded-[28px] border border-[#ebe7fe] overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(96,82,255,0.09)] transition-all duration-300 group">
+            ].map(({ step, image, title, desc }, idx) => (
+              <ScrollReveal key={step} variant="scale-up" delay={idx * 120}>
+                <div className="bg-white rounded-[28px] border border-[#ebe7fe] overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_rgba(96,82,255,0.12)] hover:-translate-y-1.5 transition-all duration-300 group">
+                  <div className="relative w-full aspect-[4/3] overflow-hidden bg-slate-100">
+                    <Image
+                      src={image}
+                      alt={title}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute top-3 right-3 w-9 h-9 rounded-full bg-[#0e0c28] flex items-center justify-center shadow-md">
+                      <span className="text-white text-[11px] font-black tracking-wide">{step}</span>
+                    </div>
+                  </div>
 
-                {/* Image + Step Badge */}
-                <div className="relative w-full aspect-[4/3] overflow-hidden">
-                  <Image
-                    src={image}
-                    alt={title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  {/* Dark navy step badge */}
-                  <div className="absolute top-3 right-3 w-9 h-9 rounded-full bg-[#0e0c28] flex items-center justify-center">
-                    <span className="text-white text-[11px] font-black tracking-wide">{step}</span>
+                  <div className="p-5">
+                    <h3 className="text-[16px] font-black text-[#0f172a] mb-1.5">{title}</h3>
+                    <p className="text-[13px] text-gray-500 leading-relaxed">{desc}</p>
                   </div>
                 </div>
-
-                {/* Text */}
-                <div className="p-5">
-                  <h3 className="text-[16px] font-black text-[#0f172a] mb-1.5">{title}</h3>
-                  <p className="text-[13px] text-gray-500 leading-relaxed">{desc}</p>
-                </div>
-
-              </div>
+              </ScrollReveal>
             ))}
           </div>
 
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ══════════════════════════════════════════
+          CTA BANNER
+      ══════════════════════════════════════════ */}
       <section className="py-20 bg-gradient-to-br from-[#6052ff] to-[#7c6fff] text-center">
         <div className="max-w-2xl mx-auto px-4">
-          <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">Not Sure Which Service?</h2>
-          <p className="text-white/80 mb-8 text-base">Contact us and we'll help you choose the best option for your needs.</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-[#6052ff] font-bold px-8 py-4 rounded-full hover:bg-gray-100 transition-all shadow-md">
-              Contact Us <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link href="/pricing" className="inline-flex items-center gap-2 border-2 border-white text-white font-bold px-8 py-4 rounded-full hover:bg-white/10 transition-all">
-              View Pricing
-            </Link>
-          </div>
+          <ScrollReveal variant="zoom-in">
+            <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">Not Sure Which Service You Need?</h2>
+            <p className="text-white/80 mb-8 text-base">Contact us and our team will help you choose the best option for your wardrobe.</p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/contact" className="inline-flex items-center gap-2 bg-white text-[#6052ff] font-bold px-8 py-4 rounded-full hover:bg-gray-100 transition-all shadow-md hover:-translate-y-1">
+                Contact Us <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link href="/pricing" className="inline-flex items-center gap-2 border-2 border-white text-white font-bold px-8 py-4 rounded-full hover:bg-white/10 transition-all hover:-translate-y-1">
+                View Pricing
+              </Link>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
     </main>
   );
 }
+
+

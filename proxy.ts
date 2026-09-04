@@ -45,7 +45,13 @@ export async function proxy(request: NextRequest) {
     },
   );
 
-  await supabase.auth.getUser();
+  const hasAuthCookie = request.cookies.getAll().some(
+    (c) => c.name.includes("sb-") || c.name.includes("auth") || c.name.includes("token")
+  );
+
+  if (hasAuthCookie) {
+    await supabase.auth.getUser();
+  }
 
   return response;
 }
